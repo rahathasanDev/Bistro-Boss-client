@@ -20,7 +20,7 @@ const Testomonial = () => {
       .then(data => setReviews(data))
   }, [])
   return (
-    <section className='my-20'>
+    <section className='my-10'>
       <Sectiontitle
         heading={'Testimonials'}
         subHeading={'what out client say'}>

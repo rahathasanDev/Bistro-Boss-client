@@ -25,6 +25,7 @@ const PopulerMenu = () => {
           item={item}></MenuItem>
         ))}
       </div>
+      <button className="btn btn-outline mt-2  border-1 border-b-4 text-black ">View Full Menu</button>
     </section>
   );
 };
