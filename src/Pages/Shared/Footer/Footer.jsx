@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer>
+    <footer className="mt-8">
       <div className="footer p-10 bg-neutral text-neutral-content">
         <div>
           <svg
@@ -20,9 +20,10 @@ const Footer = () => {
             Providing reliable tech since 1992
           </p>
         </div>
+        <div className="md:border-l h-96 border-gray-500 p-4">
         <div>
-          <span className="footer-title">Social</span>
-          <div className="grid grid-flow-col gap-4">
+          <span className="footer-title ">Social</span>
+          <div className="grid grid-flow-col gap-4 ">
             <a>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -58,10 +59,12 @@ const Footer = () => {
             </a>
           </div>
         </div>
+        </div>
+        
       </div>
       <div className="p-4 footer-center bg-base-300 text-base-content">
         <div>
-          <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+          <p>Copyright © 202 - All right reserved by ACME Industries Ltd</p>
         </div>
       </div>
     </footer>
