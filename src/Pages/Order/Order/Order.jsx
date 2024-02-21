@@ -34,9 +34,7 @@ const Order = () => {
           <Tab>Deserts</Tab>
           <Tab>Drinks</Tab>
         </TabList>
-        <TabPanel>
-         <OrderTab items={salad}></OrderTab>
-        </TabPanel>
+        <TabPanel><OrderTab items={salad}></OrderTab></TabPanel>
         <TabPanel><OrderTab items={pizza}></OrderTab></TabPanel>
         <TabPanel><OrderTab items={soup}></OrderTab></TabPanel>
         <TabPanel><OrderTab items={desserts}></OrderTab></TabPanel>
