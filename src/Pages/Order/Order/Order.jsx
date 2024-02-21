@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import orderCoverImg from '../../../assets/shop/order.jpg'
+import orderCoverImg from '../../../assets/shop/order.jpg';
 import Cover from '../../Shared/Cover/Cover';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
