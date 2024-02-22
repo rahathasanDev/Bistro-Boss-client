@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [captchaValue, setCaptchaValue] = useState('');
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -17,10 +19,19 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleCaptchaChange = (e) => {
+    setCaptchaValue(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!validateCaptcha(captchaValue)) {
+      console.log('CAPTCHA verification failed');
+      return;
+    }
     console.log('Email:', email);
     console.log('Password:', password);
+    // Proceed with login process
   };
 
   return (
@@ -70,26 +81,24 @@ const Login = () => {
                 )}
               </button>
             </div>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                Forgot your password?
-              </a>
+            <div className="mb-4">
+              <LoadCanvasTemplate />
+              <input 
+                id="captcha" 
+                name="captcha" 
+                type="text" 
+                autoComplete="off" 
+                required 
+                className={`appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm bg-white`} 
+                placeholder="Enter the CAPTCHA value" 
+                value={captchaValue}
+                onChange={handleCaptchaChange}
+              />
             </div>
           </div>
 
           <div>
             <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              
               Sign in
             </button>
           </div>
