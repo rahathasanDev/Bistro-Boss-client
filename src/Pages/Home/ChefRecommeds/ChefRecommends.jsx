@@ -27,14 +27,14 @@ const ChefRecommends = () => {
       >
         <SwiperSlide>
           <img src={sliderimg1} alt="" />
-          <button className='btn btn-outline mt-2  border-1 border-b-4 text-black mr-10  '>ADD TO CART</button>
+          <button className='btn  btn-sm btn-outline mt-2  border-1 border-b-4 text-black mr-10  '>ADD TO CART</button>
         </SwiperSlide>
 
         <SwiperSlide><img src={sliderimg2} alt="" />
-          <button className='btn btn-outline mt-2  border-1 border-b-4 text-black mr-10 '>ADD TO CART</button></SwiperSlide>
-        <SwiperSlide><img src={sliderimg3} alt="" /><button className='btn btn-outline mt-2  border-1 border-b-4 text-black mr-10 '>ADD TO CART</button></SwiperSlide>
-        <SwiperSlide><img src={sliderimg1} alt="" /><button className='btn btn-outline mt-2  border-1 border-b-4 text-black mr-10 '>ADD TO CART</button></SwiperSlide>
-        <SwiperSlide><img src={sliderimg2} alt="" /><button className='btn btn-outline mt-2  border-1 border-b-4 text-black mr-10 '>ADD TO CART</button></SwiperSlide>
+          <button className='btn btn-sm btn-outline mt-2  border-1 border-b-4 text-black mr-10 '>ADD TO CART</button></SwiperSlide>
+        <SwiperSlide><img src={sliderimg3} alt="" /><button className='btn  btn-sm btn-outline mt-2  border-1 border-b-4 text-black mr-10 '>ADD TO CART</button></SwiperSlide>
+        <SwiperSlide><img src={sliderimg1} alt="" /><button className='btn btn-sm btn-outline mt-2  border-1 border-b-4 text-black mr-10 '>ADD TO CART</button></SwiperSlide>
+        <SwiperSlide><img src={sliderimg2} alt="" /><button className='btn btn-sm  btn-outline mt-2  border-1 border-b-4 text-black mr-10 '>ADD TO CART</button></SwiperSlide>
 
       </Swiper>
     </div>
