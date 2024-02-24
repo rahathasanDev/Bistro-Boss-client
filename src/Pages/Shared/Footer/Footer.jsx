@@ -62,9 +62,9 @@ const Footer = () => {
         </div>
         
       </div>
-      <div className="p-4 footer-center bg-base-300 text-base-content">
+      <div className="p-4 footer-center  text-black">
         <div>
-          <p>Copyright © 202 - All right reserved by ACME Industries Ltd</p>
+          <p>© Copyright 2024 - All right reserved by ACME Industries Ltd</p>
         </div>
       </div>
     </footer>
