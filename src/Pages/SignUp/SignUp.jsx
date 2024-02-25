@@ -22,7 +22,7 @@ const SignUp = () => {
                         console.log('user profile info updated')
                         reset();
                         Swal.fire({
-                            position: 'top-end',
+                            position: 'top-start',
                             icon: 'success',
                             title: 'User created successfully.',
                             showConfirmButton: false,

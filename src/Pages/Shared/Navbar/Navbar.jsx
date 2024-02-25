@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/Authprovider";
+import { FaShoppingCart } from "react-icons/fa";
+import { TbLogout } from "react-icons/tb";
 
 
 const Navbar = () => {
@@ -12,33 +14,45 @@ const Navbar = () => {
             .catch(error => console.log(error));
 
     }
-    const navOptions = <>
-        <li
-            className=" hover:bg-purple-600 rounded-lg">
-            <Link to="/">Home</Link>
-        </li>
-        <li className=" hover:bg-purple-600 rounded-lg">
-            <Link to="/menu">Our Menu</Link>
-        </li>
-        <li className=" hover:bg-purple-600 rounded-lg">
-            <Link to="/order/salad">Order Food</Link>
-        </li>
-        <li className=" hover:bg-purple-600 rounded-lg">
-            <Link to="/secret">Secret</Link>
-        </li>
+    const navOptions =
+        <div className="sm:block md:flex items-center justify-center">
+            <li
+            >
+                <Link to="/">Home</Link>
+            </li>
+            <li>
+                <Link to="/menu">Our Menu</Link>
+            </li>
+            <li>
+                <Link to="/order/salad">Order Food</Link>
+            </li>
+            <li>
+                <Link to="/secret">Secret</Link>
+            </li>
+            <li>
+                <Link to='/'>
+                    <button className="btn btn-sm">
+                        <FaShoppingCart />
 
-        {
-            user ?
-                <>
-                    <button onClick={handleLogOut} className=" btn btn-sm ml-2">LogOut</button>
-                </> :
-                <>
-                    <li><Link to="/login">Login</Link></li>
-                </>
-        }
+                        <div className="badge badge-secondary">+99</div>
+                    </button>
+                </Link>
+            </li>
+
+            {
+                user ?
+                    <>
+                        {/* <span>{user?.displayName}</span> */}
+                        <button onClick={handleLogOut} className=" btn btn-sm ml-2"><TbLogout />
+                            LogOut</button>
+                    </> :
+                    <>
+                        <li><Link to="/login">Login</Link></li>
+                    </>
+            }
 
 
-    </>
+        </div>
     return (
         <>
             <div className="navbar fixed text-white  z-10 bg-opacity-20 bg-black font-medium max-w-screen-xl justify-center">
