@@ -15,7 +15,7 @@ const Navbar = () => {
 
     }
     const navOptions =
-        <div className="sm:block md:flex items-center justify-center">
+        <div className="md:flex items-center justify-center">
             <li
             >
                 <Link to="/">Home</Link>
@@ -34,7 +34,7 @@ const Navbar = () => {
                     <button className="btn btn-sm">
                         <FaShoppingCart />
 
-                        <div className="badge badge-secondary">+99</div>
+                        <div className="badge badge-secondary">+0</div>
                     </button>
                 </Link>
             </li>
