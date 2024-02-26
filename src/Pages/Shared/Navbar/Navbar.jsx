@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/Authprovider";
 import { FaShoppingCart } from "react-icons/fa";
 import { TbLogout } from "react-icons/tb";
@@ -20,25 +20,25 @@ const Navbar = () => {
         <div className="md:flex items-center justify-center">
             <li
             >
-                <Link to="/">Home</Link>
+                <NavLink to="/">Home</NavLink>
             </li>
             <li>
-                <Link to="/menu">Our Menu</Link>
+                <NavLink to="/menu">Our Menu</NavLink>
             </li>
             <li>
-                <Link to="/order/salad">Order Food</Link>
+                <NavLink to="/order/salad">Order Food</NavLink>
             </li>
             <li>
-                <Link to="/secret">Secret</Link>
+                <NavLink to="/secret">Secret</NavLink>
             </li>
             <li>
-                <Link to='/'>
+                <NavLink to='/dashboard/mycart'>
                     <button className="btn btn-sm">
                         <FaShoppingCart />
 
                         <div className="badge badge-secondary">+{cart?.length || 0}</div>
                     </button>
-                </Link>
+                </NavLink>
             </li>
 
             {
@@ -49,7 +49,7 @@ const Navbar = () => {
                             LogOut</button>
                     </> :
                     <>
-                        <li><Link to="/login">Login</Link></li>
+                        <li><NavLink to="/login">Login</NavLink></li>
                     </>
             }
 
