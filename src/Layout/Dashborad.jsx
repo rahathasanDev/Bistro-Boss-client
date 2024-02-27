@@ -1,8 +1,7 @@
-import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { FaCartShopping, FaFileContract, FaShop } from "react-icons/fa6";
+import { FaCartShopping, FaShop } from "react-icons/fa6";
 import { IoWallet } from "react-icons/io5";
-import { FaCalendar, FaCalendarAlt, FaHome } from 'react-icons/fa';
+import { FaCalendarAlt, FaHome } from 'react-icons/fa';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdEmail } from "react-icons/md";
 
