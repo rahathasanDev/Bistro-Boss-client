@@ -5,7 +5,7 @@ const MenuItem = ({item}) => {
 
   return (
     <div className="flex  space-x-4">
-      <img style={{borderRadius: '0 200px 200px 200px'}} className="w-2/5 rounded-lg" src={image} alt="" />
+      <img style={{borderRadius: '0 200px 200px 200px'}} className="w-1/3 h-4/6 md:w-2/5 rounded-lg" src={image} alt="" />
       <div>
         <h3 className="uppercase">{name}--------</h3>
         <p>{recipe}</p>
