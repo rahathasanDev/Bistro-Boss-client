@@ -28,9 +28,9 @@ const Navbar = () => {
             <li>
                 <NavLink to="/order/salad">Order Food</NavLink>
             </li>
-            <li>
+            {/* <li>
                 <NavLink to="/secret">Secret</NavLink>
-            </li>
+            </li> */}
             <li>
                 <NavLink to='/dashboard/mycart'>
                     <button className="btn btn-sm">
