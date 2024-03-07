@@ -28,7 +28,7 @@ const Dashborad = () => {
           {
             isAdmin ? <>
               <li><NavLink to='/dashboard/home' ><FaHome />ADMIN HOME</NavLink></li>
-              <li><NavLink to='/dashboard/reservations'><FaUtensils />ADD ITEMS</NavLink></li>
+              <li><NavLink to='/dashboard/addItem'><FaUtensils />ADD ITEMS</NavLink></li>
               <li><NavLink to='/dashboard/history'><IoWallet />MANAGE ITEMS</NavLink></li>
               <li><NavLink to='/dashboard/history'><FaBook />MANAGE BOOKINGS</NavLink></li>
               <li><NavLink to='/dashboard/allusers'><FaUser />ALL USERS</NavLink></li>
