@@ -1,98 +1,118 @@
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
+import { FaUtensils } from "react-icons/fa";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import Sectiontitle from "../../../Components/Sectiontitle/Sectiontitle";
 
-const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-const AddItem = () => {
-  
-  const { register, handleSubmit, reset } = useForm();
-  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
-
-  const onSubmit = data => {
-
-    const formData = new FormData();
-    formData.append('image', data.image[0])
-
-    fetch(img_hosting_url, {
-      method: 'POST',
-      body: formData
-    })
-      .then(res => res.json())
-      .then(imgResponse => {
-        if (imgResponse.success) {
-          const imgURL = imgResponse.data.display_url;
-          const { name, price, category, recipe } = data;
-          const newItem = { name, price: parseFloat(price), category, recipe, image: imgURL }
-          console.log(newItem)
-          axiosSecure.post('/menu', newItem)
-            .then(data => {
-              console.log('after posting new menu item', data.data)
-              if (data.data.insertedId) {
+const AddItems = () => {
+    const { register, handleSubmit, reset } = useForm();
+    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
+    const onSubmit = async (data) => {
+        console.log(data)
+        // image upload to imgbb and then get an url
+        const imageFile = { image: data.image[0] }
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        });
+        if (res.data.success) {
+            // now send the menu item data to the server with the image url
+            const menuItem = {
+                name: data.name,
+                category: data.category,
+                price: parseFloat(data.price),
+                recipe: data.recipe,
+                image: res.data.data.display_url
+            }
+            // 
+            const menuRes = await axiosSecure.post('/menu', menuItem);
+            console.log(menuRes.data)
+            if(menuRes.data.insertedId){
+                // show success popup
                 reset();
                 Swal.fire({
-                  position: 'top-end',
-                  icon: 'success',
-                  title: 'Item added successfully',
-                  showConfirmButton: false,
-                  timer: 1500
-                })
-              }
-            })
+                    position: "top-end",
+                    icon: "success",
+                    title: `${data.name} is added to the menu.`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
         }
-      })
+        console.log( 'with image url', res.data);
+    };
 
-  };
+    return (
+        <div className=" w-full p-4 ">
+            <Sectiontitle heading="add an item" subHeading="What's new?" ></Sectiontitle>
+            <div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="form-control w-full my-6">
+                        <label className="label">
+                            <span className="label-text">Recipe Name*</span>
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Recipe Name"
+                            {...register('name', { required: true })}
+                            required
+                            className="input input-bordered w-full" />
+                    </div>
+                    <div className="flex gap-6">
+                        {/* category */}
+                        <div className="form-control w-full my-6">
+                            <label className="label">
+                                <span className="label-text">Category*</span>
+                            </label>
+                            <select defaultValue="default" {...register('category', { required: true })}
+                                className="select select-bordered w-full">
+                                <option disabled value="default">Select a category</option>
+                                <option value="salad">Salad</option>
+                                <option value="pizza">Pizza</option>
+                                <option value="soup">Soup</option>
+                                <option value="dessert">Dessert</option>
+                                <option value="drinks">Drinks</option>
+                            </select>
+                        </div>
 
+                        {/* price */}
+                        <div className="form-control w-full my-6">
+                            <label className="label">
+                                <span className="label-text">Price*</span>
+                            </label>
+                            <input
+                                type="number"
+                                placeholder="Price"
+                                {...register('price', { required: true })}
+                                className="input input-bordered w-full" />
+                        </div>
 
-  return (
-    <div className="w-full px-10">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-control w-full mb-4">
-          <label className="label">
-            <span className="label-text font-semibold">Recipe Name*</span>
-          </label>
-          <input type="text" placeholder="Recipe Name"
-            {...register("name", { required: true, maxLength: 120 })}
-            className="input input-bordered w-full " />
+                    </div>
+                    {/* recipe details */}
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Recipe Details</span>
+                        </label>
+                        <textarea {...register('recipe')} className="textarea textarea-bordered h-24" placeholder="Bio"></textarea>
+                    </div>
+
+                    <div className="form-control w-full my-6">
+                        <input {...register('image', { required: true })} type="file" className="file-input w-full max-w-xs" />
+                    </div>
+
+                    <button className="btn">
+                        Add Item <FaUtensils className="ml-4"></FaUtensils>
+                    </button>
+                </form>
+            </div>
         </div>
-        <div className="flex my-4">
-          <div className="form-control w-full ">
-            <label className="label">
-              <span className="label-text">Category*</span>
-            </label>
-            <select defaultValue="Pick One" {...register("category", { required: true })} className="select select-bordered">
-              <option disabled>Pick One</option>
-              <option>Pizza</option>
-              <option>Soup</option>
-              <option>Salad</option>
-              <option>Dessert</option>
-              <option>Desi</option>
-              <option>Drinks</option>
-            </select>
-          </div>
-          <div className="form-control w-full ml-4">
-            <label className="label">
-              <span className="label-text font-semibold">Price*</span>
-            </label>
-            <input type="number" {...register("price", { required: true })} placeholder="Type here" className="input input-bordered w-full " />
-          </div>
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Recipe Details</span>
-          </label>
-          <textarea {...register("recipe", { required: true })} className="textarea textarea-bordered h-24" placeholder="Bio"></textarea>
-        </div>
-        <div className="form-control w-full my-4">
-          <label className="label">
-            <span className="label-text">Item Image*</span>
-          </label>
-          <input type="file" {...register("image", { required: true })} className="file-input file-input-bordered w-full " />
-        </div>
-        <input className="btn btn-sm mt-4" type="submit" value="Add Item" />
-      </form>
-    </div>
-  );
+    );
 };
 
-export default AddItem;
+export default AddItems;
