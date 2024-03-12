@@ -3,9 +3,10 @@ import { FaUtensils } from "react-icons/fa";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import sectiontitle from "../../../Components/Sectiontitle/Sectiontitle"
 import Sectiontitle from "../../../Components/Sectiontitle/Sectiontitle";
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_key = import.meta.env.VITE_Image_Upload_token;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddItems = () => {
@@ -49,9 +50,9 @@ const AddItems = () => {
     };
 
     return (
-        <div className=" w-full p-4 ">
+        <div className="w-full p-4">
             <Sectiontitle heading="add an item" subHeading="What's new?" ></Sectiontitle>
-            <div>
+            <div >
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control w-full my-6">
                         <label className="label">
