@@ -4,11 +4,12 @@ import { FaAd, FaBook, FaCalendar,  FaHome, FaList, FaShoppingCart,FaUsers, FaUt
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdEmail } from "react-icons/md";
 import useCart from '../Hooks/useCart';
+import useAdmin from '../Hooks/useAdmin';
 
 const Dashborad = () => {
   const [cart] = useCart();
   // ToDo
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   return (
 
     <div className="drawer lg:drawer-open">
@@ -27,7 +28,7 @@ const Dashborad = () => {
         {
                         isAdmin ? <>
                             <li>
-                                <NavLink to="/dashboard/adminHome">
+                                <NavLink to="/dashboard/adminhome">
                                     <FaHome></FaHome>
                                     Admin Home</NavLink>
                             </li>
@@ -55,7 +56,7 @@ const Dashborad = () => {
                             :
                             <>
                                 <li>
-                                    <NavLink to="/dashboard/userHome">
+                                    <NavLink to="/dashboard/userhome">
                                         <FaHome></FaHome>
                                         User Home</NavLink>
                                 </li>
@@ -65,7 +66,7 @@ const Dashborad = () => {
                                         Not History</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/cart">
+                                    <NavLink to="/dashboard/mycart">
                                         <FaShoppingCart></FaShoppingCart>
                                         My Cart ({cart.length})</NavLink>
                                 </li>

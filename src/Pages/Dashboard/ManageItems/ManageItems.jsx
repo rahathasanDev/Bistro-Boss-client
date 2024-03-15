@@ -8,37 +8,64 @@ import { Link } from "react-router-dom";
 
 const ManageItems = () => {
     const [menu, , refetch] = useMenu();
-    const axiosSecure = useAxiosSecure();
+    const [axiosSecure] = useAxiosSecure();
 
+    // const handleDeleteItem = (item) => {
+    //     Swal.fire({
+    //         title: "Are you sure?",
+    //         text: "You won't be able to revert this!",
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonText: "Yes, delete it!"
+    //     }).then(async (result) => {
+    //         if (result.isConfirmed) {
+    //             const res = await axiosSecure.delete(`/menu/${item._id}`);
+    //             console.log(item._id);
+    //             console.log(res.data);
+    //             if (res.data.deletedCount > 0) {
+    //                 // refetch to update the ui
+    //                 refetch();
+    //                 Swal.fire({
+    //                     position: "top-end",
+    //                     icon: "success",
+    //                     title: `${item.name} has been deleted`,
+    //                     showConfirmButton: false,
+    //                     timer: 1500
+    //                 });
+    //             }
+
+
+    //         }
+    //     });
+    // }
     const handleDeleteItem = (item) => {
         Swal.fire({
-            title: "Are you sure?",
+            title: 'Are you sure?',
             text: "You won't be able to revert this!",
-            icon: "warning",
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then(async (result) => {
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
             if (result.isConfirmed) {
-                const res = await axiosSecure.delete(`/menu/${item._id}`);
-                console.log(item._id);
-                console.log(res.data);
-                if (res.data.deletedCount > 0) {
-                    // refetch to update the ui
-                    refetch();
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: `${item.name} has been deleted`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-
+                axiosSecure.delete(`/menu/${item._id}`)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
 
             }
-        });
+        })
     }
 
     return (
